@@ -2,7 +2,10 @@ export const Filter = () => {
   return (
     <>
       <form>
-        <label for="cars">Выберите машину:</label>
+        <label>
+          <span>Car brand</span>
+          <input value="Enter the text" type="text" />
+        </label>
         <select id="cars">
           <option value="car1">Машина 1</option>
           <option value="car2">Машина 2</option>
@@ -13,10 +16,6 @@ export const Filter = () => {
           <option value="car7">Машина 7</option>
           <option value="car8">Машина 8</option>
         </select>
-        <label>
-          <span>Car brand</span>
-          <input value="Enter the text" type="text" />
-        </label>
         <label>
           <span>Price/ 1 hour</span>
           <input value="To $" type="text" />

@@ -1,12 +1,26 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { CarDetails } from "./CarDetails";
+import {
+  Button,
+  Collection,
+  Decor,
+  Img,
+  Info,
+  Item,
+  LoadMore,
+  Name,
+  Price,
+  Title,
+} from "./ListAuto.styled";
 
 const baseURL = "https://648ca3ae8620b8bae7ed2c50.mockapi.io/adverts";
 
 export const ListAuto = () => {
   const [cars, setCars] = useState([]);
   const [selectedCar, setSelectedCar] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -30,36 +44,47 @@ export const ListAuto = () => {
     setSelectedCar(null);
   };
 
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const itemsToShow = cars.slice(0, endIndex);
+
+  const loadMore = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
   return (
     <>
-      <ul>
-        {cars.map((car) => {
-          return (
-            <li
-              key={car.id}
-              onClick={() => {
-                console.log(selectedCar);
-                openModal(car);
-              }}
-            >
-              <img src={car.img} alt="" width="274" height="268" />
-              <div>
-                <h2>
-                  {car.make} {car.model},
-                </h2>
-                <p>{car.year}</p>
-                <p>{car.rentalPrice}</p>
-              </div>
-              <div>
-                {car.address} | {car.rentalCompany} | Premium | {car.type} |{" "}
-                {car.mileage} | {car.functionalities[0]}
-              </div>
-              <button>Learn more</button>
-            </li>
-          );
-        })}
-      </ul>
-      {selectedCar && <CarDetails car={selectedCar} onClose={closeModal} />}
+      <Collection>
+        <ul>
+          {itemsToShow.map((car) => {
+            return (
+              <Item
+                key={car.id}
+                onClick={() => {
+                  openModal(car);
+                }}
+              >
+                <Img src={car.img} alt="" width="274" height="268" />
+                <Title>
+                  <Name>
+                    {car.make} <Decor>{car.model}</Decor>, {car.year}
+                  </Name>
+                  <Price>{car.rentalPrice}</Price>
+                </Title>
+                <Info>
+                  {car.address} | {car.rentalCompany} | {car.type} |
+                  {car.mileage} m | {car.accessories[2]}
+                </Info>
+                <Button>Learn more</Button>
+              </Item>
+            );
+          })}
+        </ul>
+        {selectedCar && <CarDetails car={selectedCar} onClose={closeModal} />}
+      </Collection>
+      {cars.length > endIndex && (
+        <LoadMore onClick={loadMore}>Load more</LoadMore>
+      )}
     </>
   );
 };

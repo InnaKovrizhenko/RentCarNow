@@ -6,7 +6,7 @@ export const Box = styled.div`
   padding: 0 15px;
 
   min-height: 100vh;
-  background: linear-gradient(#b0c4de, #e6e6fa);
+  background: white;
   background-size: 100%;
 
   display: flex;
