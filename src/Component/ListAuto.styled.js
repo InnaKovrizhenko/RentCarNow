@@ -15,6 +15,7 @@ export const Item = styled.li`
   width: 274px;
   height: 426px;
   text-decoration: none;
+  position: relative;
 
   margin-right: 29px;
   &:nth-child(4n) {
@@ -108,4 +109,11 @@ export const LoadMore = styled.a`
     color: rgba(11, 68, 205, 1);
     cursor: pointer;
   }
+`;
+
+export const IconContainer = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 `;

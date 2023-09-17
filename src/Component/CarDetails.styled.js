@@ -141,4 +141,5 @@ export const ButtonClose = styled.button`
   background: transparent;
   padding: 9px;
   z-index: 3;
+  cursor: pointer;
 `;

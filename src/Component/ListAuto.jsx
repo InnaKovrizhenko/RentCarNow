@@ -5,6 +5,7 @@ import {
   Button,
   Collection,
   Decor,
+  IconContainer,
   Img,
   Info,
   Item,
@@ -14,6 +15,9 @@ import {
   Title,
 } from "./ListAuto.styled";
 
+import normalIcon from "../images/normal.png";
+import activeIcon from "../images/active.png";
+
 const baseURL = "https://648ca3ae8620b8bae7ed2c50.mockapi.io/adverts";
 
 export const ListAuto = () => {
@@ -21,6 +25,7 @@ export const ListAuto = () => {
   const [selectedCar, setSelectedCar] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
+  const [currentIcon, setCurrentIcon] = useState(normalIcon);
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -65,6 +70,22 @@ export const ListAuto = () => {
                 }}
               >
                 <Img src={car.img} alt="" width="274" height="268" />
+                <IconContainer
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentIcon(
+                      currentIcon === normalIcon ? activeIcon : normalIcon
+                    );
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                  >
+                    {currentIcon}
+                  </svg>
+                </IconContainer>
                 <Title>
                   <Name>
                     {car.make} <Decor>{car.model}</Decor>, {car.year}
