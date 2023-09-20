@@ -4,6 +4,7 @@ export const Collection = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 100%;
 
   margin-bottom: 100px;
   padding-left: 8px;
@@ -116,4 +117,5 @@ export const IconContainer = styled.div`
   top: 10px;
   right: 10px;
   cursor: pointer;
+  z-index: 2;
 `;

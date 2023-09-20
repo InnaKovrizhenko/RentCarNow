@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Header, Box, Main } from "./AppBar.styled";
-import { Navigation } from "./Navigation";
+import { Navigation } from "../Navigation/Navigation";
 
 export const AppBar = () => {
   return (

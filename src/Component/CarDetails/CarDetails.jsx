@@ -9,6 +9,7 @@ import {
   Headline,
   Img,
   Info,
+  LinkToTelNumber,
   Modal,
   ModalBackdrop,
   ModalContent,
@@ -16,9 +17,11 @@ import {
 } from "./CarDetails.styled";
 import { createPortal } from "react-dom";
 import { useEffect } from "react";
-import closeIcon from "../images/close_cross_icon.png";
+import closeIcon from "../../images/close_cross_icon.png";
 
 const modalRoot = document.querySelector("#modal-root");
+
+const phoneNumber = "+380730000000";
 
 export const CarDetails = ({ car, onClose }) => {
   useEffect(() => {
@@ -91,7 +94,11 @@ export const CarDetails = ({ car, onClose }) => {
                 Price: <Accent>{car.rentalPrice}</Accent>
               </Box>
             </Conditions>
-            <Button>Rent car</Button>
+            <Button>
+              <LinkToTelNumber href={`tel:${phoneNumber}`}>
+                Rental car
+              </LinkToTelNumber>
+            </Button>
           </ModalContent>
         </Modal>
       </ModalBackdrop>

@@ -1,5 +1,5 @@
-import { Filter } from "../Component/Filter";
-import { ListAuto } from "../Component/ListAuto";
+import { Filter } from "../Component/Filter/Filter";
+import { ListAuto } from "../Component/ListAuto/ListAuto";
 
 export const Catalog = () => {
   return (

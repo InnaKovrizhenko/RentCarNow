@@ -1,7 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import { Catalog } from "./Pages/Catalog";
 import { Home } from "./Pages/Home";
-import { AppBar } from "./Component/AppBar";
+import { AppBar } from "./Component/AppBar/AppBar";
+import { Favorite } from "./Pages/Favorite";
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
         <Route path="/" element={<AppBar />}>
           <Route index element={<Home />} />
           <Route path="/catalog" element={<Catalog />} />
-          {/* <Route path="/favorites" element={<Favorite />} /> */}
+          <Route path="/favorites" element={<Favorite />} />
         </Route>
       </Routes>
     </>

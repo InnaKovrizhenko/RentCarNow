@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { CarDetails } from "./CarDetails";
+import { CarDetails } from "../CarDetails/CarDetails";
 import {
   Button,
   Collection,
@@ -9,37 +9,37 @@ import {
   Img,
   Info,
   Item,
-  LoadMore,
   Name,
   Price,
   Title,
-} from "./ListAuto.styled";
-
-import normalIcon from "../images/normal.png";
-import activeIcon from "../images/active.png";
+} from "../ListAuto/ListAuto.styled";
+import activeIcon from "../../images/active.svg";
+import { useFavorites } from "../../CustomHooks/useFavorites";
 
 const baseURL = "https://648ca3ae8620b8bae7ed2c50.mockapi.io/adverts";
 
-export const ListAuto = () => {
-  const [cars, setCars] = useState([]);
+export const FavoriteAuto = () => {
+  const [favorites, , removeFavorite] = useFavorites();
+  const [favoriteCars, setFavoriteCars] = useState([]);
   const [selectedCar, setSelectedCar] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
-  const [currentIcon, setCurrentIcon] = useState(normalIcon);
 
   useEffect(() => {
-    const fetchCars = async () => {
+    const fetchFavoriteCars = async () => {
       try {
-        const response = await axios.get(baseURL);
-        setCars(response.data);
+        const promises = favorites.map((id) => axios.get(`${baseURL}/${id}`));
+
+        const responses = await Promise.all(promises);
+
+        const validCars = responses.map((response) => response.data);
+
+        setFavoriteCars(validCars);
       } catch (error) {
-        console.log(error);
+        console.error("Error fetching cars:", error);
       }
     };
-    fetchCars();
-  }, []);
 
-  console.log(cars);
+    fetchFavoriteCars();
+  }, [favorites]);
 
   const openModal = (car) => {
     setSelectedCar(car);
@@ -49,19 +49,11 @@ export const ListAuto = () => {
     setSelectedCar(null);
   };
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const itemsToShow = cars.slice(0, endIndex);
-
-  const loadMore = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
-  };
-
   return (
     <>
       <Collection>
         <ul>
-          {itemsToShow.map((car) => {
+          {favoriteCars.map((car) => {
             return (
               <Item
                 key={car.id}
@@ -73,18 +65,10 @@ export const ListAuto = () => {
                 <IconContainer
                   onClick={(e) => {
                     e.stopPropagation();
-                    setCurrentIcon(
-                      currentIcon === normalIcon ? activeIcon : normalIcon
-                    );
+                    removeFavorite(car.id);
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                  >
-                    {currentIcon}
-                  </svg>
+                  <img src={activeIcon} alt="icon" />
                 </IconContainer>
                 <Title>
                   <Name>
@@ -94,7 +78,7 @@ export const ListAuto = () => {
                 </Title>
                 <Info>
                   {car.address} | {car.rentalCompany} | {car.type} |
-                  {car.mileage} m | {car.accessories[2]}
+                  {car.mileage} m |{car.accessories[2]}
                 </Info>
                 <Button>Learn more</Button>
               </Item>
@@ -103,9 +87,6 @@ export const ListAuto = () => {
         </ul>
         {selectedCar && <CarDetails car={selectedCar} onClose={closeModal} />}
       </Collection>
-      {cars.length > endIndex && (
-        <LoadMore onClick={loadMore}>Load more</LoadMore>
-      )}
     </>
   );
 };

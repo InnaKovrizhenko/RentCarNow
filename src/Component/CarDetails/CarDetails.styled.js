@@ -8,7 +8,7 @@ export const Modal = styled.div`
   background: rgba(255, 255, 255, 1);
   padding: 40px;
   border-radius: 24px;
-  z-index: 2;
+  z-index: 3;
 `;
 
 export const ModalBackdrop = styled.div`
@@ -21,7 +21,7 @@ export const ModalBackdrop = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(18, 20, 23, 0.5);
-  z-index: 3;
+  z-index: 4;
 `;
 
 export const Img = styled.img`
@@ -127,6 +127,15 @@ export const Button = styled.button`
     background-color: rgba(11, 68, 205, 1);
     cursor: pointer;
   }
+`;
+
+export const LinkToTelNumber = styled.a`
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.43;
+  color: rgba(255, 255, 255, 1);
+  word-spacing: 3px;
+  text-decoration: none;
 `;
 
 export const ButtonClose = styled.button`
