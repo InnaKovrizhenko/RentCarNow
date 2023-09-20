@@ -19,11 +19,11 @@ export const Filter = () => {
 
   const [inputValue, setInputValue] = useState("");
   const [isListOpen, setIsListOpen] = useState(false);
-  const [selectedCar, setSelectedCar] = useState(null);
+  const [, setSelectedCar] = useState(null);
 
   const [inputPriceValue, setInputPriceValue] = useState("");
   const [isListPriceOpen, setIsListPriceOpen] = useState(false);
-  const [selectedPriceCar, setSelectedPriceCar] = useState(null);
+  const [, setSelectedPriceCar] = useState(null);
 
   const [mileageFrom, setMileageFrom] = useState("");
   const [mileageTo, setMileageTo] = useState("");
@@ -97,7 +97,7 @@ export const Filter = () => {
             <InputBrand
               placeholder="Enter the text"
               type="text"
-              value={selectedCar}
+              value={inputValue}
               onChange={handleInputChange}
             />
             <button type="button" onClick={toggleList}>
@@ -126,7 +126,7 @@ export const Filter = () => {
             <InputPrice
               placeholder="To $"
               type="text"
-              value={selectedPriceCar}
+              value={inputPriceValue}
               onChange={handleInputPriceChange}
             />
             <button type="button" onClick={togglePriceList}>
