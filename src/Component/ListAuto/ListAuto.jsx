@@ -9,6 +9,7 @@ import {
   Img,
   Info,
   Item,
+  List,
   LoadMore,
   Name,
   Price,
@@ -87,7 +88,7 @@ export const ListAuto = () => {
   return (
     <>
       <Collection>
-        <ul>
+        <List>
           {itemsToShow.map((car) => {
             return (
               <Item
@@ -122,7 +123,7 @@ export const ListAuto = () => {
               </Item>
             );
           })}
-        </ul>
+        </List>
         {selectedCar && <CarDetails car={selectedCar} onClose={closeModal} />}
       </Collection>
       {cars.length > endIndex && (

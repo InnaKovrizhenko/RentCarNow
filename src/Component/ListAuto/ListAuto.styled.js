@@ -11,6 +11,13 @@ export const Collection = styled.div`
   padding-right: 8px;
 `;
 
+export const List = styled.ul`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+`;
+
 export const Item = styled.li`
   display: inline-block;
   width: 274px;
@@ -19,9 +26,9 @@ export const Item = styled.li`
   position: relative;
 
   margin-right: 29px;
-  &:nth-child(4n) {
+  /* &:nth-child(4n) {
     margin-right: 0;
-  }
+  } */
   margin-bottom: 50px;
 
   font-family: Manrope;
