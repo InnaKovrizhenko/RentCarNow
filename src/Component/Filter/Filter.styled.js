@@ -68,7 +68,7 @@ export const InputMilea = styled.input`
   border: 1px solid rgba(247, 247, 251, 1);
 `;
 
-export const Button = styled.button`
+export const Button = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
